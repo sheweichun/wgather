@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const Constant = require('./util/constant');
-const { TypeCheck } = require('@ali/gather-core');
+const { TypeCheck } = require('wgather-core');
 
 const { isObject } = TypeCheck;
 
