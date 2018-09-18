@@ -4,7 +4,7 @@
 // const path = require('path');
 const program = require('commander');
 const co = require('co');
-const Logger = require('../lib/util/logger');
+// const Logger = require('../lib/util/logger');
 
 
 program
