@@ -1,6 +1,6 @@
 {
   "name": "wgather",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "lib/index.js",
   "bin": {
     "gather": "bin/gather.js"
@@ -57,7 +57,7 @@
     "template_js": "^0.7.1-1",
     "unzip-stream": "^0.1.2",
     "urllib": "^2.23.0",
-    "wgather-core": "^0.0.6"
+    "wgather-core": "^0.0.7"
   },
   "devDependencies": {
     "ava": "^0.21.0",
