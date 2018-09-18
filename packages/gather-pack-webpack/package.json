@@ -1,6 +1,6 @@
 {
   "name": "wgather-pack-webpack",
-  "version": "0.0.27",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "repository": {
     "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",
@@ -39,7 +39,6 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "@ali/gather-core": "^0.0.5",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -71,6 +70,7 @@
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-sources": "^1.1.0",
+    "wgather-core": "^0.0.2",
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {

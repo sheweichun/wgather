@@ -1,5 +1,5 @@
 {
-  "name": "@ali/gather-pack-customeservice-worker",
+  "name": "wgather-pack-customeservice-worker",
   "version": "0.0.2",
   "main": "lib/index.js",
   "repository": {
@@ -39,7 +39,6 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "@ali/gather-core": "^0.0.5",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
@@ -63,6 +62,7 @@
     "webpack-bundle-analyzer": "^2.8.3",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
+    "wgather-core": "^0.0.2",
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {
