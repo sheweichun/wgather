@@ -1,6 +1,6 @@
 
 const Constant = require('./constant');
-const { Config } = require('@ali/gather-core');
+const { Config } = require('wgather-core');
 
 const Setting = Config('gather-dll.json', Constant.CWD, {
 });

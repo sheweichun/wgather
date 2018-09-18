@@ -3,7 +3,7 @@
 // const fs = require('fs');
 const { ConcatSource } = require('webpack-sources');
 const dayjs = require('dayjs');
-const { Packer, Logger } = require('@ali/gather-core');
+const { Packer, Logger } = require('wgather-core');
 
 
 const Constant = require('./util/constant');

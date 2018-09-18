@@ -1,7 +1,7 @@
 
 // const path = require('path');
 // const fs = require('fs');
-const { Packer, Logger } = require('@ali/gather-core');
+const { Packer, Logger } = require('wgather-core');
 const Constant = require('./util/constant');
 const DllPlugin = require('./plugin/dll');
 const webpack = require('webpack');

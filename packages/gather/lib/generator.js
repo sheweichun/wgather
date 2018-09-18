@@ -10,8 +10,8 @@ const { npmInstall } = require('./util/npm');
 
 module.exports = class Generator {
   constructor(name, option = {}) {
-    const { scope = '@ali' } = option;
-    this.name = `${scope}/gather-generator-${name}`;
+    const { scope = '' } = option;
+    this.name = `${scope ? `${scope}/` : ''}wgather-generator-${name}`;
     this.option = option;
     this.inquirer = require('inquirer');
     this.downloader = Downloader;
@@ -35,7 +35,7 @@ module.exports = class Generator {
   }
   * loadPackage() {
     const genFn = yield Loader.loadNpm(this.name, GENERATOR_PATH,
-      this.option.develop ? path.resolve(__dirname, '../../gather-generator-crf/lib/index.js') : null);
+      this.option.develop ? path.resolve(__dirname, '../../wgather-generator-crf/lib/index.js') : null);
     this.handler = genFn(this);
   }
 

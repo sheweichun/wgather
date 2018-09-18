@@ -1,4 +1,4 @@
-const { Logger } = require('@ali/gather-core');
+const { Logger } = require('wgather-core');
 const Constant = require('./constant');
 const path = require('path')
 ;

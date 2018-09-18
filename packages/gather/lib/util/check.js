@@ -169,7 +169,7 @@ module.exports = {
     if (!fs.existsSync(npmDirName)) {
       Logger.warn(`【${name}】 hasn't installed...`);
       yield checkPackageByTnpm(name);
-      Logger.log(`start to install 【${name}】...`);
+      Logger.log(`start to install ${installDir}/【${name}】... `);
       Npm.install(name, {
         cwd: installDir,
       });
@@ -210,7 +210,7 @@ module.exports = {
     if (!fs.existsSync(dirName)) {
       Logger.warn(`【${name}】 hasn't installed...`);
       yield checkPackageByTnpm(name);
-      Logger.log(`start to install 【${name}】...`);
+      Logger.log(`start to install ${installDir}/【${name}】... `);
       Npm.install(name, {
         cwd: installDir,
       });

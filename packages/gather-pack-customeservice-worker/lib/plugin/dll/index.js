@@ -5,11 +5,10 @@ const Config = require('../../util/config');
 const Constant = require('../../util/constant');
 const Setting = require('../../util/setting');
 const fs = require('fs');
-const { Logger } = require('@ali/gather-core');
+const { Logger, TypeCheck } = require('wgather-core');
 
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const webpack = require('webpack');
-const { TypeCheck } = require('@ali/gather-core');
 
 const { isArray, isObject } = TypeCheck;
 // function isBoolean(val) {

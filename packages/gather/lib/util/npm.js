@@ -2,6 +2,8 @@
 
 const shelljs = require('shelljs');
 // const exec = require('./exec');
+const fs = require('fs');
+const path = require('path');
 const PLUGIN_PATH = require('./path').PLUGIN_PATH;
 const Config = require('./config');
 const Logger = require('./logger');
@@ -22,6 +24,13 @@ function checkRegistry(registry) {
   return `--registry=${registry}`;
 }
 
+function checkPkg(cwd) {
+  const cwdPkg = path.join(cwd, 'package.json');
+  if (!fs.existsSync(cwdPkg)) {
+    fs.writeFileSync(cwdPkg, '{}');
+  }
+}
+
 const npm = (options, opt = {}) => {
   let { registry } = opt;
   const { cwd = PLUGIN_PATH } = opt;
@@ -32,7 +41,7 @@ const npm = (options, opt = {}) => {
   }
 
   const pwd = shelljs.pwd();
-
+  checkPkg(cwd);
   shelljs.cd(cwd);
   // '--save-prefix=>='
   options = options.concat(['--save']);
@@ -40,7 +49,7 @@ const npm = (options, opt = {}) => {
   // console.log(`exec ===>  ${pm.name} ${options.join(' ')}`);
   shelljs.exec(`${pm.name} ${options.join(' ')}`, { silent: true });
 //   exec(pm.name, options, { stdio: 'inherit' });
-  shelljs.cd(pwd);
+  shelljs.cd(pwd.stdout);
 };
 
 
@@ -50,10 +59,11 @@ exports.tarInstall = (dir, name, opts = {}) => {
     options.push(checkRegistry(opts.registry));
   }
   const pwd = shelljs.pwd();
+  checkPkg(dir);
   shelljs.cd(dir);
   options = options.concat([opts.dev ? '--save-dev' : '--save', '--silent']);
   const ret = shelljs.exec(`${pm.name} ${options.join(' ')}`, { silent: true });
-  shelljs.cd(pwd);
+  shelljs.cd(pwd.stdout);
   if (ret.code !== 0) {
     return `install ${name} fail!`;
   }
@@ -66,10 +76,11 @@ exports.npmInstall = (dir, opts = {}) => {
     options.push(checkRegistry(opts.registry));
   }
   const pwd = shelljs.pwd();
+  checkPkg(dir);
   shelljs.cd(dir);
   options = options.concat(['--silent']);
   const ret = shelljs.exec(`${pm.name} ${options.join(' ')}`);
-  shelljs.cd(pwd);
+  shelljs.cd(pwd.stdout);
   if (ret.code !== 0) {
     Logger.error(`运行【${pm.name} ${pm.install}】失败!\n${ret.output}`);
     return false;
