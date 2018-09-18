@@ -1,6 +1,6 @@
 {
   "name": "wgather",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "lib/index.js",
   "bin": {
     "wgather": "bin/gather.js"
