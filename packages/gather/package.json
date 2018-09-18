@@ -3,7 +3,7 @@
   "version": "0.0.9",
   "main": "lib/index.js",
   "bin": {
-    "gather": "bin/gather.js"
+    "wgather": "bin/gather.js"
   },
   "repository": {
     "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",

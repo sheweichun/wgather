@@ -16,7 +16,7 @@ module.exports = {
       // const stream = fs.createWriteStream(fileName);
       // console.log('url :', `http://gitlab.alibaba-inc.com/gather/${name}/repository/archive.zip?ref=${tag}`);
       Logger.log(`正在下载${name}-${tag}.zip`);
-      request(`http://gitlab.alibaba-inc.com/gather/${name}/repository/archive.zip?ref=${tag}&private_token=${Config.get('gitlab_token')}`)
+      request(`http://github.com/sheweichun/${name}/repository/archive.zip?ref=${tag}&private_token=${Config.get('gitlab_token')}`)
         // .pipe(stream)
         // .pipe(unzip.Extract({ path: output }))
         .pipe(unzip.Parse())
