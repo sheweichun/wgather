@@ -1,0 +1,4 @@
+lerna-debug.log
+npm-debug.log
+.vscode/
+node_modules/

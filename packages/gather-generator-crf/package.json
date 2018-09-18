@@ -1,0 +1,58 @@
+{
+  "name": "@ali/gather-generator-crf",
+  "version": "0.0.5",
+  "main": "lib/index.js",
+  "repository": {
+    "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",
+    "type": "git"
+  },
+  "author": "洛丹 <weichun.swc@alibaba-inc.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava",
+    "prepublish": "npm run lint",
+    "lint": "./node_modules/.bin/eslint ./src",
+    "fix": "./node_modules/.bin/eslint ./src --fix"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "ava": {
+    "files": [
+      "test/*.js"
+    ],
+    "source": [
+      "**/*.{js,jsx}",
+      "!lib/**/*"
+    ],
+    "concurrency": 5,
+    "failFast": true,
+    "failWithoutAssertions": false,
+    "verbose": true,
+    "powerAssert": false,
+    "require": [
+      "babel-polyfill"
+    ],
+    "babel": "inherit"
+  },
+  "dependencies": {
+    "@ali/gather-core": "^0.0.5"
+  },
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "babel-eslint": "^7.2.3",
+    "babel-polyfill": "^6.23.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.2",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npm.alibaba-inc.com"
+  }
+}

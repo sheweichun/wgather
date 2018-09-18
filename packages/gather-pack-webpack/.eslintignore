@@ -1,0 +1,11 @@
+# 忽略目录
+dist/
+lib/
+coverage/
+node_modules/
+example/
+# 忽略文件
+**/*.min.js
+**/*-min.js
+server.js
+
