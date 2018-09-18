@@ -1,6 +1,6 @@
 {
   "name": "wgather-pack-customeservice-worker",
-  "version": "0.0.2",
+  "version": "0.0.6",
   "main": "lib/index.js",
   "repository": {
     "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",
@@ -62,7 +62,7 @@
     "webpack-bundle-analyzer": "^2.8.3",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
-    "wgather-core": "^0.0.2",
+    "wgather-core": "^0.0.6",
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {

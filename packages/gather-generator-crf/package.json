@@ -39,7 +39,7 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "wgather-core": "^0.0.2"
+    "wgather-core": "^0.0.6"
   },
   "devDependencies": {
     "ava": "^0.21.0",
