@@ -8,7 +8,7 @@ const fs = require('fs');
 const ROOT_PATH = path.join(__dirname, '../../');
 // const pkg = require('../../package.json');
 
-const PLUGIN_PATH = path.join(homeDir, '.gather');
+const PLUGIN_PATH = path.join(homeDir, '.wgather');
 const PACK_PATH = path.join(PLUGIN_PATH, 'packers');
 const PLUGINS_PATH = path.join(PLUGIN_PATH, 'plugins');
 const GENERATOR_PATH = path.join(PLUGIN_PATH, 'generators');
