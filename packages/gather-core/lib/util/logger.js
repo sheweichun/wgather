@@ -7,7 +7,7 @@ const version = require('../../package.json').version;
 /**
  * Prefix.
  */
-const prefix = `[gather@${version}]`;
+const prefix = `[wgather@${version}]`;
 const sep = chalk.gray('-');
 
 /**

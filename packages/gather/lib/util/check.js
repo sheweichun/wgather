@@ -15,8 +15,8 @@ const urllib = require('urllib');
 
 // const Loading = require('./loading');
 
-const BASE_URL = 'http://registry.npm.alibaba-inc.com';
-const URL = `${BASE_URL}/${pkg.name}`;
+// const BASE_URL = 'http://registry.npm.alibaba-inc.com';
+// const URL = `${BASE_URL}/${pkg.name}`;
 
 
 function checkPackageByTnpm(name) {
@@ -138,7 +138,7 @@ module.exports = {
     if (!Config.get('updateCheck')) return;
     const npm = Config.get('pm').name;
     return new Promise((resolve, reject) => {
-      urllib.request(URL, { dataType: 'json', followRedirect: true }, (err, data) => {
+      urllib.request(`${Config.get('pm').registry}/${pkg.name}`, { dataType: 'json', followRedirect: true }, (err, data) => {
         if (err || !data || data.error) {
           return reject(err || data.error);
         }
