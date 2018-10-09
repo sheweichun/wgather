@@ -1,6 +1,6 @@
 {
   "name": "wgather-pack-webpack",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "lib/index.js",
   "repository": {
     "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",
@@ -70,7 +70,7 @@
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-sources": "^1.1.0",
-    "wgather-core": "^0.0.11",
+    "wgather-core": "^0.0.12",
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {

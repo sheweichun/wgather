@@ -1,6 +1,6 @@
 {
   "name": "wgather-generator-crf",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "main": "lib/index.js",
   "repository": {
     "url": "git@gitlab.alibaba-inc.com:taefed/gather.git",
@@ -39,7 +39,7 @@
     "babel": "inherit"
   },
   "dependencies": {
-    "wgather-core": "^0.0.11"
+    "wgather-core": "^0.0.12"
   },
   "devDependencies": {
     "ava": "^0.21.0",
