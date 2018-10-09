@@ -348,6 +348,18 @@ const Base = {
       new webpack.DefinePlugin(Config.get('env')),
       new ProgressBarPlugin(),
     ], pages.plugins, otherPlugins));
+    if (!webpackConfig.externals) {
+      webpackConfig.externals = {};
+    }
+    webpackConfig.externals.medivh = 'Medivh';
+    webpackConfig.externals['medivh-runtime'] = 'MedivhRuntime';
+    webpackConfig.externals['medivh-redux'] = 'MedivhRedux';
+    webpackConfig.externals['medivh-router'] = 'MedivhRouter';
+
+    webpackConfig.externals['worker-react'] = 'Medivh';
+    webpackConfig.externals['worker-react-runtime'] = 'MedivhRuntime';
+    webpackConfig.externals['worker-react-redux'] = 'MedivhRedux';
+    webpackConfig.externals['worker-react-router'] = 'MedivhRouter';
     return webpackConfig;
   },
   getBuildLoadesAndPlugins(packOpt = {}, nominify) {

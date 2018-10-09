@@ -72,8 +72,8 @@ module.exports = class Gather {
       this.moduleDirList.push(path.resolve(result.installDir, NODE_MODULES));
       gatherPackWebpack = require(result.dirName);
     } else {
-      gatherPackWebpack = require(`../../wgather-pack-${this.packName}/lib/index`);
-      this.moduleDirList.push(path.resolve('../../wgather-pack-webpack', NODE_MODULES));
+      gatherPackWebpack = require(`../../gather-pack-${this.packName}/lib/index`);
+      this.moduleDirList.push(path.resolve('../../gather-pack-webpack', NODE_MODULES));
     }
 
     Logger.success(`【${this.packName}】loaded succesfully,use【${Date.now() - now}】ms`);

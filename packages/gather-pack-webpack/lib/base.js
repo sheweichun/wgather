@@ -335,6 +335,8 @@ const Base = {
         publicPath: Config.get('publicPath'),
         filename: '[name].js',
         chunkFilename: '[name].js',
+        library: Config.get('library'),
+        libraryTarget: Config.get('libraryTarget'),
       },
       devtool: 'source-map',
       plugins: [],

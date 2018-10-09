@@ -9,7 +9,7 @@ function realPath(name) {
 
 const toString = Object.prototype.toString;
 // const merge = Object.assign;
-let config = {
+const _config = {
   pages: 'src/pages',
   pageEntry: 'app.js',
   dest: 'build',
@@ -66,6 +66,7 @@ let config = {
     // api: realPath('src/pages/isv/api'),
   },
 };
+let config = _config;
 
 function normalizeEntry(entry) {
   const type = toString.call(entry);
@@ -93,7 +94,7 @@ module.exports = {
   },
   merge(cfg) {
     if (!cfg || Object.keys(cfg).length === 0) return;
-    config = Object.assign({}, config, cfg);
+    config = Object.assign({}, _config, cfg);
     if (config.dll) {
       if (typeof config.dll !== 'string' || config.dll !== false) {
         config.dll = {

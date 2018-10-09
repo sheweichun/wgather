@@ -12,42 +12,42 @@ const Config = require('./util/config');
 
 const merge = Object.assign;
 
-function autoInstall(compiler, gather, config) {
-  const prevResolve = compiler.resolvers.normal.resolve;
-  compiler.resolvers.normal.resolve = function (...args) {
-    const cb = args[args.length - 1];
-    if (typeof cb === 'function') {
-      args[args.length - 1] = function (...cbargs) {
-        let resource = args[2];
-          // && !config.resolve.alias[getModuleByResource(resource)]
-        if (cbargs[0] && resource) {
-          const resArr = resource.split('/');
-          resource = resArr[0];
-          if (!resource || resource.indexOf('.') >= 0 || config.resolve.alias[resource]) {
-            return cb(...cbargs);
-          }
-          console.log();
-          Logger.warn(`【${resource}】will installed `);
-          const ret = gather.installPackage(Constant.CWD, resource);
-          if (ret) {
-            Logger.error(ret);
-          } else {
-            Logger.success(`【${resource}】installed successfully!`);
-          }
-          args[args.length - 1] = cb;
-            /*eslint-disable*/
-            compiler.inputFileSystem._statStorage.data.clear();
-            /*eslint-enable*/
-          prevResolve.apply(compiler.resolvers.normal, args);
+// function autoInstall(compiler, gather, config) {
+//   const prevResolve = compiler.resolvers.normal.resolve;
+//   compiler.resolvers.normal.resolve = function (...args) {
+//     const cb = args[args.length - 1];
+//     if (typeof cb === 'function') {
+//       args[args.length - 1] = function (...cbargs) {
+//         let resource = args[2];
+//           // && !config.resolve.alias[getModuleByResource(resource)]
+//         if (cbargs[0] && resource) {
+//           const resArr = resource.split('/');
+//           resource = resArr[0];
+//           if (!resource || resource.indexOf('.') >= 0 || config.resolve.alias[resource]) {
+//             return cb(...cbargs);
+//           }
+//           console.log();
+//           Logger.warn(`【${resource}】will installed `);
+//           const ret = gather.installPackage(Constant.CWD, resource);
+//           if (ret) {
+//             Logger.error(ret);
+//           } else {
+//             Logger.success(`【${resource}】installed successfully!`);
+//           }
+//           args[args.length - 1] = cb;
+//             /*eslint-disable*/
+//             compiler.inputFileSystem._statStorage.data.clear();
+//             /*eslint-enable*/
+//           prevResolve.apply(compiler.resolvers.normal, args);
 
-          return;
-        }
-        cb(...cbargs);
-      };
-    }
-    prevResolve.apply(compiler.resolvers.normal, args);
-  };
-}
+//           return;
+//         }
+//         cb(...cbargs);
+//       };
+//     }
+//     prevResolve.apply(compiler.resolvers.normal, args);
+//   };
+// }
 
 
 function checkNull(obj, key, defaultValue) {
@@ -56,32 +56,67 @@ function checkNull(obj, key, defaultValue) {
   }
 }
 
+function findItem(list = [], item) {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] === item) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function generatePackOption(gather, isDev) {
+  let result;
+  if (typeof gather.packOption === 'function') {
+    result = gather.packOption({
+      context: Constant.ROOT_PATH,
+      dev: isDev,
+    });
+  } else {
+    result = gather.packOption;
+  }
+  checkNull(result, 'autoInstall', true);
+  checkNull(result, 'common', {
+    name: 'vendor',
+    filename: 'vendor.js',
+  });
+  if (result.dll) {
+    const pluginList = gather.pluginList;
+    if (!findItem(pluginList, DllPlugin)) {
+      pluginList.push(DllPlugin);
+    }
+  }
+  Config.merge(result.config);
+  return result;
+}
+
 module.exports = class WebPackPacker extends Packer {
   constructor(gather) {
     super(gather);
-    this.packOption = typeof gather.packOption === 'function' ? gather.packOption({
-      context: Constant.ROOT_PATH,
-    }) : gather.packOption;
-    const packOption = this.packOption;
-    this.webpackBaseConfig = packOption.webpackConfig || {};
-    Config.merge(packOption.config);
+    // this.packOption = typeof gather.packOption === 'function' ? gather.packOption({
+    //   context: Constant.ROOT_PATH,
+    // }) : gather.packOption;
+    // const packOption = this.packOption;
+    // this.webpackBaseConfig = packOption.webpackConfig || {};
+    // Config.merge(packOption.config);
     this.checkList = Base.checkList;
     // console.log('packOption :', this.packOption);
-    if (this.packOption.dll) {
-      this.gather.pluginList.push(DllPlugin);
-    }
-    checkNull(packOption, 'autoInstall', true);
-    checkNull(packOption, 'common', {
-      name: 'vendor',
-      filename: 'vendor.js',
-    });
+    // if (this.packOption.dll) {
+    //   this.gather.pluginList.push(DllPlugin);
+    // }
+    // checkNull(packOption, 'autoInstall', true);
+    // checkNull(packOption, 'common', {
+    //   name: 'vendor',
+    //   filename: 'vendor.js',
+    // });
   }
   getBuildConfig() {
     const { nominify, visual, entries } = this.gather.option;
+    const packOption = generatePackOption(this.gather, false);
     const webpackConfig = Base.getBuildConfig(
       Base.getBaseConfig(this.gather.moduleDirList),
-      this.webpackBaseConfig, merge({ entries }, this.packOption));
-    const ret = Base.getBuildLoadesAndPlugins(this.packOption, nominify);
+      packOption.webpackConfig, merge({ entries }, packOption));
+    const ret = Base.getBuildLoadesAndPlugins(packOption, nominify);
     webpackConfig.module.rules = webpackConfig.module.rules.concat(ret.loaders);
     // webpackConfig.plugins = webpackConfig.plugins.concat(ret.plugins);
     webpackConfig.plugins = ret.plugins.concat(webpackConfig.plugins);
@@ -133,10 +168,11 @@ module.exports = class WebPackPacker extends Packer {
   }
   getDevConfig() {
     const { visual, entries } = this.gather.option;
+    const packOption = generatePackOption(this.gather, true);
     const webpackConfig = Base.getDevConfig(
-      Base.getBaseConfig(this.gather.moduleDirList, this.packOption),
-      this.webpackBaseConfig, merge({ entries }, this.packOption));
-    const ret = Base.getDevLoadesAndPlugins(this.packOption);
+      Base.getBaseConfig(this.gather.moduleDirList, packOption),
+      packOption.webpackConfig, merge({ entries }, packOption));
+    const ret = Base.getDevLoadesAndPlugins(packOption);
     webpackConfig.module.rules = webpackConfig.module.rules.concat(ret.loaders);
     // webpackConfig.plugins = webpackConfig.plugins.concat(ret.plugins);
     webpackConfig.plugins = ret.plugins.concat(webpackConfig.plugins);
@@ -162,7 +198,7 @@ module.exports = class WebPackPacker extends Packer {
   // }
   dev(config) {
     const { port = 9000 } = this.gather.option;
-    const self = this;
+    // const self = this;
     const open = require('open');
     const express = require('express');
     const app = express();
